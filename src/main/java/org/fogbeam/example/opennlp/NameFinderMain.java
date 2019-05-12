@@ -13,9 +13,6 @@ import opennlp.tools.util.Span;
 
 public class NameFinderMain
 {
-	/**
-	 * @param args
-	 */
 	public static void main( String[] args ) throws Exception
 	{
 		InputStream modelIn = new FileInputStream( "models/en-ner-person.model" );
