@@ -12,28 +12,38 @@ import opennlp.tools.tokenize.Tokenizer;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 
-
+/**
+ * Prueba de Entidad Tokenizer
+ * @author Pedro Lagüera
+ */
 public class TokenizerMain
 {
+	/**
+	 * Main Function
+	 * @param args Invocation Arguments
+	 * @throws Exception Execution may Throw an Exception
+	 */
 	public static void main( String[] args ) throws Exception
 	{
 		
 		// the provided model
 		// InputStream modelIn = new FileInputStream( "models/en-token.bin" );
 
-		// the model we trained
+		// The model we trained
 		InputStream modelIn = new FileInputStream( "models/en-token.model" );
+		// The text to tokenize
 		String filePath = "eval_data/en-sent.eval";
 		
 		try
 		{
-			TokenizerModel model = new TokenizerModel( modelIn );
+			TokenizerModel model = new TokenizerModel(modelIn);
 		
 			Tokenizer tokenizer = new TokenizerME(model);
 			
 			/* note what happens with the "three depending on which model you use */			
 			String[] tokens = tokenizer.tokenize(new String(Files.readAllBytes(Paths.get(filePath))));
 			
+			// If file is empty use given string
 			if (tokens.length == 0)
 				tokens = tokenizer.tokenize
 				(  "A ranger journeying with Oglethorpe, founder of the Georgia Colony, " 

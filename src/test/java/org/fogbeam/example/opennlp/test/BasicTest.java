@@ -2,20 +2,34 @@ package org.fogbeam.example.opennlp.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BasicTest {
+import opennlp.tools.tokenize.Tokenizer;
+import opennlp.tools.tokenize.TokenizerME;
+import opennlp.tools.tokenize.TokenizerModel;
+import opennlp.tools.util.InvalidFormatException;
 
-	@Before
-	public void setUp() throws Exception {
+public class BasicTest {
+	
+	static TokenizerModel model;
+	static Tokenizer tokenizer;
+
+	@BeforeClass
+	public static void setUp() throws Exception {
+		model = new TokenizerModel(new FileInputStream("models/en-token.model"));
+		tokenizer = new TokenizerME(model);
 	}
 
 	@Test
-	public void test() {
-		//fail("Not yet implemented");
-		assertTrue(true);
-		
+	public void test() throws InvalidFormatException, IOException {
+		String[] tokens = tokenizer.tokenize("A ranger journeying");
+		assertEquals("A", tokens[0]);
+		assertEquals("ranger", tokens[1]);
+		assertEquals("journeying", tokens[2]);
 	}
 
 }
