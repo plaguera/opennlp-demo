@@ -75,8 +75,11 @@ public class SentenceDetectionMain
 	
 	
 	static String convertStreamToString(java.io.InputStream is) {
-	    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-	    return s.hasNext() ? s.next() : "";
+	    java.util.Scanner s = new java.util.Scanner(is);
+	    s.useDelimiter("\\A");
+	    String result = s.hasNext() ? s.next() : "";
+	    s.close();
+	    return result;
 	}
 	
 }
