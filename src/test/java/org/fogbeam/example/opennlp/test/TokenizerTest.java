@@ -13,17 +13,32 @@ import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.util.InvalidFormatException;
 
-public class BasicTest {
+/**
+ * Tokenizer Tests
+ * @author pedro
+ */
+public class TokenizerTest {
 	
+	// NLP Model
 	static TokenizerModel model;
+	// Tokenizer Object
 	static Tokenizer tokenizer;
 
+	/**
+	 * Set up our NLP model and Tokenizer Object Testing
+	 * @throws Exception May throw Exception
+	 */
 	@BeforeClass
 	public static void setUp() throws Exception {
 		model = new TokenizerModel(new FileInputStream("models/en-token.model"));
 		tokenizer = new TokenizerME(model);
 	}
-
+	
+	/**
+	 * Test "A ranger journeying"
+	 * @throws InvalidFormatException May throw InvalidFormatException
+	 * @throws IOException May throw IOException
+	 */
 	@Test
 	public void test1() throws InvalidFormatException, IOException {
 		String[] tokens = tokenizer.tokenize("A ranger journeying");
@@ -33,6 +48,11 @@ public class BasicTest {
 		assertEquals("journeying", tokens[2]);
 	}
 	
+	/**
+	 * Test "Great Kings who were killed in the Wars."
+	 * @throws InvalidFormatException May throw InvalidFormatException
+	 * @throws IOException May throw IOException
+	 */
 	@Test
 	public void test2() throws InvalidFormatException, IOException {
 		String[] tokens = tokenizer.tokenize("Great Kings who were killed in the Wars.");
@@ -48,6 +68,11 @@ public class BasicTest {
 		assertEquals(".", tokens[8]);
 	}
 	
+	/**
+	 * Test "Oglethorpe, founder of the Georgia Colony"
+	 * @throws InvalidFormatException May throw InvalidFormatException
+	 * @throws IOException May throw IOException
+	 */
 	@Test
 	public void test3() throws InvalidFormatException, IOException {
 		String[] tokens = tokenizer.tokenize("Oglethorpe, founder of the Georgia Colony");
